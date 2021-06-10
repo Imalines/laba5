@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Редактор таблицы</title>
+    <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <script src="edittable.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/pulse/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+<body style="background-color: #444444">
+
+<div class="jquery-script-clear"></div>
+
+<h1 align="center" style="color: #E1F2FF">Редактор таблицы</h1>
+<table class="table table-striped table-dark" id="makeEditable">
+    <thead>
+    <tr>
+        <th>Предмет</th>
+        <th>Группа</th>
+        <th>Подгруппа</th>
+        <th>Преподователь</th>
+        <th>Время</th>
+        <th>Действие</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Математика</td>
+        <td>ПИ-320</td>
+        <td>1</td>
+        <td>Петров А.А.</td>
+        <td>14:35</td>
+    </tr>
+    <tr>
+        <td>Информатика</td>
+        <td>РБП-102</td>
+        <td>2</td>
+        <td>Сидоров С.В.</td>
+        <td>10:00</td>
+    </tr>
+    <tr>
+        <td>Физика</td>
+        <td>ПМ-410</td>
+        <td></td>
+        <td>Ярдеев Г.Н.</td>
+        <td>10:00</td>
+    </tr>
+    <tr>
+        <td>История</td>
+        <td>ПИ-320</td>
+        <td>2</td>
+        <td>Харалек А.В.</td>
+        <td>8:30</td>
+    </tr>
+    </tbody>
+</table>
+<button id="but_add" class="btn btn-success">Добавить строчку</button>
+
+
+</body>
+
+<script>
+    $(function () {
+        $('#makeEditable').SetEditable({$addButton: $('#but_add')});
+        $('#submit_data').on('click', function () {
+            var td = TableToCSV('makeEditable', ',');
+            console.log(td);
+            var ar_lines = td.split("\n");
+            var each_data_value = [];
+            for (i = 0; i < ar_lines.length; i++) {
+                each_data_value[i] = ar_lines[i].split(",");
+            }
+            for (i = 0; i < each_data_value.length; i++) {
+                if (each_data_value[i] > 1) {
+                    console.log(each_data_value[i][2]);
+                    console.log(each_data_value[i].length);
+                }
+            }
+        });
+    });
+</script>
+</html>
